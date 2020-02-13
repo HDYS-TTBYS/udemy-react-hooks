@@ -10,11 +10,11 @@ const events = (state = [], action) => {
             if (length === 0) {
                 id = 1;
             } else {
-                id = state[length - 1].id + 1; //最後の要素+1
+                id = state[length - 1].id + 1;
             }
             return [...state, { id: id, ...event }]; //stateに追加
         case 'DELETE_EVENT':
-            return state;
+            return state.filter(event => event.id !== action.id);
         case 'DERETE_ALL_EVENT':
             return [];
 
