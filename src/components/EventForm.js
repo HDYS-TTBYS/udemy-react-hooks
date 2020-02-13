@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { CREATE_EVENT, DERETE_ALL_EVENTS } from '../actions/actions_index';
 
 const EventForm = ({ state, dispatch }) => {
     const [title, setTitle] = useState('');
@@ -8,7 +9,7 @@ const EventForm = ({ state, dispatch }) => {
     const addEvent = e => {
         e.preventDefault(); //全体リロード停止
         dispatch({
-            type: 'CREATE_EVENT',
+            type: CREATE_EVENT,
             title: title,
             body: body,
         });
@@ -23,7 +24,7 @@ const EventForm = ({ state, dispatch }) => {
             '全てのイベントを本当に削除しても良いですか？'
         );
         if (result) {
-            dispatch({ type: 'DERETE_ALL_EVENTS' });
+            dispatch({ type: DERETE_ALL_EVENTS });
         }
     };
     return (
