@@ -1,7 +1,25 @@
-import React from 'react';
+import React, { useReducer, useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
+import reducer from '../reducers/reducer_index';
+
 const App = () => {
+    const [state, dispatch] = useReducer(reducer, []);
+    const [title, setTitle] = useState('');
+    const [body, setBody] = useState('');
+
+    const addEvent = e => {
+        e.preventDefault(); //全体リロード停止
+        dispatch({
+            type: 'CREATE_EVENT',
+            title: title,
+            body: body,
+        });
+
+        setTitle('');
+        setBody('');
+    };
+
     return (
         <>
             <div className="container-fluid">
@@ -10,22 +28,34 @@ const App = () => {
             <form>
                 <div className="form-group">
                     <label htmlFor="formEventTitle">タイトル</label>
-                    <input className="form-control" id="formEventTitle" />
+                    <input
+                        className="form-control"
+                        id="formEventTitle"
+                        value={title}
+                        onChange={e => setTitle(e.target.value)}
+                    />
                 </div>
 
                 <div className="form-group">
                     <label htmlFor="formEventBody">ボディー</label>
-                    <textarea className="form-control" id="formEventBody" />
+                    <textarea
+                        className="form-control"
+                        id="formEventBody"
+                        value={body}
+                        onChange={e => setBody(e.target.value)}
+                    />
                 </div>
 
-                <button className="btn btn-primary">イベントを作成する</button>
+                <button className="btn btn-primary" onClick={addEvent}>
+                    イベントを作成する
+                </button>
                 <button className="btn btn-danger">
                     全てのイベントを削除する
                 </button>
 
                 <h4>イベント一覧</h4>
 
-                <table class="table table-hover">
+                <table className="table table-hover">
                     <thead>
                         <tr>
                             <th scope="col">ID</th>
