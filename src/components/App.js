@@ -21,6 +21,16 @@ const App = () => {
         setBody('');
     };
 
+    const deleteAllEvents = e => {
+        e.preventDefault(); //全体リロード停止
+        const result = window.confirm('すべてのイベントを削除？');
+        if (result === true) {
+            dispatch({
+                type: 'DERETE_ALL_EVENTS',
+            });
+        }
+    };
+
     return (
         <>
             <div className="container-fluid">
@@ -47,10 +57,18 @@ const App = () => {
                     />
                 </div>
 
-                <button className="btn btn-primary" onClick={addEvent}>
+                <button
+                    className="btn btn-primary"
+                    onClick={addEvent}
+                    disabled={!title || !body}
+                >
                     イベントを作成する
                 </button>
-                <button className="btn btn-danger">
+                <button
+                    className="btn btn-danger"
+                    onClick={deleteAllEvents}
+                    disabled={state.length === 0}
+                >
                     全てのイベントを削除する
                 </button>
 
