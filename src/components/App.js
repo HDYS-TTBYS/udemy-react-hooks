@@ -7,7 +7,10 @@ import AppConttext from '../contexts/AppContext';
 import reducer from '../reducers/reducer_index';
 
 const App = () => {
-    const [state, dispatch] = useReducer(reducer, []);
+    const inisialState = {
+        events: [],
+    };
+    const [state, dispatch] = useReducer(reducer, inisialState);
 
     return (
         <>
