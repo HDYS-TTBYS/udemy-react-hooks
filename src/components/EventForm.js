@@ -1,8 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { CREATE_EVENT, DERETE_ALL_EVENTS } from '../actions/actions_index';
+import AppContext from '../contexts/AppContext';
 
-const EventForm = ({ state, dispatch }) => {
+const EventForm = () => {
+    const { state, dispatch } = useContext(AppContext);
     const [title, setTitle] = useState('');
     const [body, setBody] = useState('');
 
